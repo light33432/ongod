@@ -4,7 +4,7 @@ localStorage.removeItem('gadgetLoggedIn');
 localStorage.removeItem('gadgetLastNotif');
 
 // --- API Endpoints ---
-const API_BASE = "https://ongod-phone-gadget-1.onrender.com/api";
+const API_BASE = "https://ongod-phone.onrender.com";
 const ORDERS_API = `${API_BASE}/orders`;
 const PRODUCTS_API = `${API_BASE}/products`;
 const USERS_API = `${API_BASE}/users`;
