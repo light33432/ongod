@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ONGOD PHONE GADGET</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <script src="script.js"></script>
+  <style>
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: linear-gradient(135deg, #e0e7ff 0%, #f7f9fb 100%);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    .header-container {
+      background: linear-gradient(90deg, #1a237e 60%, #3949ab 100%);
+      color: #fff;
+      padding: 22px 0 16px 0;
+      box-shadow: 0 2px 16px rgba(26,35,126,0.13);
+    }
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      position: relative;
+    }
+    .header-logo {
+      display: flex;
+      align-items: center;
+    }
+    .header-logo img {
+      width: 54px;
+      height: 54px;
+      border-radius: 12px;
+      margin-right: 16px;
+      box-shadow: 0 2px 8px rgba(26,35,126,0.18);
+    }
+    .header-title {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 8px rgba(26,35,126,0.18);
+    }
+    .header-actions {
+      position: absolute;
+      right: 32px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    #notification-btn {
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      transition: transform 0.2s;
+      position: relative;
+    }
+    #notification-btn:hover {
+      transform: scale(1.12);
+    }
+    .notif-dot {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      width: 13px;
+      height: 13px;
+      background: #e74c3c;
+      border-radius: 50%;
+      border: 2px solid #fff;
+    }
+    .search-bar {
+      max-width: 600px;
+      margin: 38px auto 0 auto;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    .search-bar input {
+      flex: 1;
+      padding: 14px 18px;
+      border: 1.5px solid #b3b8e0;
+      border-radius: 10px;
+      font-size: 1.08rem;
+      outline: none;
+      background: #f4f6fa;
+      transition: border 0.2s;
+    }
+    .search-bar input:focus {
+      border-color: #3949ab;
+    }
+    .search-bar button {
+      padding: 14px 28px;
+      background: linear-gradient(90deg, #3949ab 60%, #1a237e 100%);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1.08rem;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px rgba(26,35,126,0.10);
+    }
+    .search-bar button:hover {
+      background: #1a237e;
+      box-shadow: 0 4px 16px rgba(26,35,126,0.18);
+    }
+    main {
+      max-width: 1200px;
+      margin: 38px auto;
+      padding: 0 32px;
+    }
+    .main-title {
+      font-size: 2.3rem;
+      font-weight: 700;
+      color: #1a237e;
+      margin-bottom: 28px;
+      text-align: center;
+      letter-spacing: 1.5px;
+    }
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #3949ab;
+      margin: 36px 0 18px 0;
+      letter-spacing: 1px;
+    }
+    .Gadget-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+    }
+    .Gadget-item {
+      background: linear-gradient(135deg, #fff 60%, #e3e8ff 100%);
+      border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(26,35,126,0.10);
+      padding: 22px 16px 24px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.2s, transform 0.2s;
+      border: 1.5px solid #e0e7ff;
+    }
+    .Gadget-item:hover {
+      box-shadow: 0 8px 32px rgba(26,35,126,0.18);
+      transform: translateY(-4px) scale(1.03);
+    }
+    .Gadget-item img {
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 14px;
+      background: #f0f2f5;
+      box-shadow: 0 2px 8px rgba(26,35,126,0.10);
+    }
+    .Gadget-item h2 {
+      font-size: 1.18rem;
+      font-weight: 700;
+      margin: 0 0 10px 0;
+      color: #1a237e;
+      text-align: center;
+    }
+    .Gadget-item p {
+      color: #3949ab;
+      font-weight: 700;
+      margin: 0 0 14px 0;
+      font-size: 1.08rem;
+    }
+    .button-group {
+      display: flex;
+      gap: 12px;
+    }
+    .button-group button {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      background: linear-gradient(90deg, #3949ab 60%, #1a237e 100%);
+      color: #fff;
+      font-size: 1.02rem;
+      transition: background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px rgba(26,35,126,0.10);
+    }
+    .button-group button:hover {
+      background: #1a237e;
+      box-shadow: 0 4px 16px rgba(26,35,126,0.18);
+    }
+    .footer {
+      background: linear-gradient(90deg, #1a237e 60%, #3949ab 100%);
+      color: #fff;
+      text-align: center;
+      padding: 22px 0;
+      margin-top: 54px;
+      font-size: 1.08rem;
+      letter-spacing: 1px;
+    }
+    .modal-bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(26,35,126,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+    }
+    .modal-content {
+      background: linear-gradient(135deg, #fff 60%, #e3e8ff 100%);
+      border-radius: 18px;
+      padding: 36px 28px 28px 28px;
+      max-width: 370px;
+      width: 100%;
+      box-shadow: 0 8px 32px rgba(26,35,126,0.18);
+      position: relative;
+      text-align: center;
+    }
+    .modal-content img {
+      width: 130px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 14px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 8px rgba(26,35,126,0.10);
+    }
+    .modal-content h2 {
+      margin: 0 0 10px 0;
+      font-size: 1.25rem;
+      color: #1a237e;
+      font-weight: 700;
+    }
+    .modal-content p {
+      margin: 0 0 20px 0;
+      color: #3949ab;
+      font-size: 1.08rem;
+    }
+    .modal-content button {
+      background: #2ecc71;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 26px;
+      font-size: 1.08em;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+    .modal-content .close-btn {
+      position: absolute;
+      top: 12px; right: 18px;
+      background: none;
+      border: none;
+      font-size: 1.7em;
+      color: #888;
+      cursor: pointer;
+    }
+    @media (max-width: 900px) {
+      .header-content, main { padding: 0 10px; }
+      .Gadget-list { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .header-title { font-size: 1.2rem; }
+      .Gadget-list { grid-template-columns: 1fr; }
+      .header-content { padding: 0 4px; }
+      main { padding: 0 4px; }
+    }
+    #register-form-modal { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(26,35,126,0.18); align-items:center; justify-content:center; z-index:10001; }
+    #register-form-modal > div { background:#fff; border-radius:12px; padding:32px 24px; box-shadow:0 2px 16px rgba(26,35,126,0.13); }
+    #register-form-modal input, #register-form-modal select { display:block; width:100%; margin-bottom:12px; padding:10px; border-radius:6px; border:1px solid #b3b8e0; }
+    #register-form-modal button { margin-right:8px; }
+    #login-modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(26,35,126,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10001;
+    }
+    #login-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px 24px;
+      box-shadow: 0 2px 16px rgba(26,35,126,0.13);
+      min-width: 320px;
+      text-align: center;
+    }
+    #login-box input {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #b3b8e0;
+    }
+    #login-box button {
+      margin: 10px 5px 0 5px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      background: #3949ab;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #login-box button:hover {
+      background: #1a237e;
+    }
+    .switch-link {
+      color: #3949ab;
+      cursor: pointer;
+      font-size: 0.98em;
+      margin: 0 4px;
+      text-decoration: underline;
+    }
+    /* Verification Modal Styles */
+    #verify-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(26,35,126,0.18);
+      align-items: center;
+      justify-content: center;
+      z-index: 10002;
+    }
+    #verify-modal > div {
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px 24px;
+      box-shadow: 0 2px 16px rgba(26,35,126,0.13);
+      text-align: center;
+      max-width: 350px;
+      margin: auto;
+    }
+    #verify-modal input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border-radius: 6px;
+      border: 1px solid #b3b8e0;
+    }
+    #verify-modal button {
+      margin: 0 6px 0 0;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 1.08em;
+      transition: background 0.2s;
+    }
+    #verify-modal button:first-child {
+      background: #2ecc71;
+      color: #fff;
+    }
+    #verify-modal button:last-child {
+      background: #e74c3c;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <!-- Login/Register Modal -->
+  <div id="login-modal">
+    <div id="login-box">
+      <h2 id="login-title">Login</h2>
+      <input type="text" id="login-email" placeholder="Email" autocomplete="off"><br>
+      <input type="password" id="login-password" placeholder="Password"><br>
+      <button id="login-btn" onclick="login()">Login</button>
+      <button id="register-btn" onclick="showRegisterForm()" style="display:none;">Register</button>
+      <div>
+        <span class="switch-link" id="switch-to-register" onclick="showRegister()">Don't have an account? Register</span>
+        <span class="switch-link" id="switch-to-login" onclick="showLogin()" style="display:none;">Already have an account? Login</span>
+      </div>
+      <div id="login-error" style="color:#e74c3c;margin-top:10px;"></div>
+    </div>
+    <!-- Registration Form Modal -->
+    <div id="register-form-modal">
+      <div>
+        <h2 style="color:#3949ab;">Register</h2>
+        <input type="text" id="email" placeholder="Email" required>
+        <input type="text" id="reg-phone" placeholder="Phone Number" required>
+        <input type="text" id="reg-username" placeholder="Username" required>
+        <input type="password" id="reg-password" placeholder="Password" required>
+        <select id="reg-state" onchange="updateAreaOptions()" required>
+          <option value="">Select State</option>
+          <option value="Lagos">Lagos</option>
+          <option value="Ogun">Ogun</option>
+          <option value="Oyo">Oyo</option>
+          <option value="Osun">Osun</option>
+          <option value="Ondo">Ondo</option>
+          <option value="Ekiti">Ekiti</option>
+        </select>
+        <select id="reg-area" required>
+          <option value="">Select Area</option>
+        </select>
+        <input type="text" id="reg-street" placeholder="Street" required>
+        <input type="text" id="reg-address" placeholder="Full Address" required>
+        <button onclick="register()">Register</button>
+        <button onclick="closeRegisterForm()">Cancel</button>
+        <div id="reg-error" style="color:#e74c3c;margin-top:10px;"></div>
+      </div>
+    </div>
+    <!-- Verification Modal -->
+    <div id="verify-modal">
+      <div>
+        <h2 style="color:#3949ab;">Verify Your Email</h2>
+        <p>A verification code has been sent to your email. Enter it below:</p>
+        <input type="text" id="verify-code" placeholder="Enter code">
+        <div style="margin-bottom:12px;">
+          <button onclick="acceptVerification()">Accept</button>
+          <button onclick="declineVerification()">Decline</button>
+        </div>
+        <div id="verify-error" style="color:#e74c3c;"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Main Content -->
+  <div id="main-content" style="display:none;">
+    <div class="header-container">
+      <div class="header-content">
+        <div class="header-logo">
+          <img src="Gemini_Generated_Image_63jjax63jjax63jj.png" alt="ONGOD Logo">
+          <span class="header-title">ONGOD PHONE GADGET</span>
+        </div>
+        <div class="header-actions">
+          <img src="notification icon.png" alt="Notification" id="notification-btn" onclick="showNotifications()">
+        </div>
+      </div>
+    </div>
+    <section class="search-bar">
+      <input type="text" id="search-input" placeholder="Search for gadgets...">
+      <button id="search-btn" onclick="searchGadgets()">Search</button>
+    </section>
+    <main>
+      <h1 class="main-title">Latest Phones, Laptops & Accessories</h1>
+      <div class="section-title">Phones</div>
+      <div id="phones-list" class="Gadget-list"></div>
+      <div class="section-title">Laptops</div>
+      <div id="laptops-list" class="Gadget-list"></div>
+      <div class="section-title">Accessories</div>
+      <div id="accessories-list" class="Gadget-list"></div>
+    </main>
+    <footer class="footer">
+      <p>&copy; 2025 Gadget Store. All rights reserved.</p>
+    </footer>
+    <!-- Modal for Buy Now and Details -->
+    <div id="modal-bg" class="modal-bg" style="display:none;">
+      <div class="modal-content" id="modal-content"></div>
+    </div>
+    <!-- Notification Modal -->
+    <div id="notif-modal" class="modal-bg" style="display:none;">
+      <div class="modal-content" style="max-width:400px;">
+        <button class="close-btn" onclick="document.getElementById('notif-modal').style.display='none'">&times;</button>
+        <h2>Notification History</h2>
+        <div style="color:#888;font-size:0.98em;margin-bottom:8px;">All your notifications and order updates are shown below.</div>
+        <div id="notif-messages" style="text-align:left;max-height:250px;overflow-y:auto;"></div>
+      </div>
+    </div>
+  </div>
+  <section id="loading-screen" style="display:flex;align-items:center;justify-content:center;height:100vh;background:rgba(255,255,255,0.9);position:fixed;top:0;left:0;width:100%;z-index:9999;">
+    <div style="text-align:center;">
+      <img src="images/loading.png" alt="Loading..." style="width:80px;height:80px;">
+      <p style="color:#3949ab;font-size:1.2em;margin-top:16px;">Loading...</p>
+    </div>
+    <script>
+      setTimeout(() => {
+        document.getElementById('loading-screen').style.display = 'none';
+      }, 2000);
+    </script>
+  </section>
+  <!-- Customer Care Floating Button -->
+  <button id="care-chat-btn" title="Customer Care" style="position:fixed;bottom:100px;right:30px;z-index:10001;background:#2ecc71;border:none;border-radius:50%;width:60px;height:60px;box-shadow:0 2px 8px rgba(0,0,0,0.18);cursor:pointer;">
+    <img src="images/customer care.jpg" alt="Customer Care" style="width:32px;height:32px;">
+  </button>
+  <!-- Customer Care Chat Window -->
+  <div id="care-chat-modal" style="display:none;position:fixed;bottom:170px;right:30px;width:320px;max-width:95vw;background:#fff;border-radius:14px;box-shadow:0 4px 24px rgba(0,0,0,0.18);z-index:10002;flex-direction:column;">
+    <div style="background:#2ecc71;color:#fff;padding:14px 18px;border-radius:14px 14px 0 0;display:flex;align-items:center;justify-content:space-between;">
+      <span><img src="customer-care.png" alt="Care" style="width:24px;height:24px;vertical-align:middle;margin-right:6px;"> Customer Care</span>
+      <button onclick="document.getElementById('care-chat-modal').style.display='none';" style="background:none;border:none;color:#fff;font-size:1.3em;cursor:pointer;">&times;</button>
+    </div>
+    <div id="care-chat-messages" style="padding:16px;max-height:220px;overflow-y:auto;font-size:1em;background:#f6fafd;"></div>
+    <form id="care-chat-form" style="display:flex;gap:6px;padding:10px;" onsubmit="event.preventDefault(); sendCareMessage();">
+      <input type="text" id="care-chat-input" placeholder="Type your message..." required style="flex:1;padding:8px;border-radius:6px;border:1px solid #ccc;">
+      <button type="submit" style="background:#2ecc71;color:#fff;border:none;border-radius:6px;padding:8px 14px;">Send</button>
+    </form>
+  </div>
+  <script>
+    // Areas and streets for each state
+    const stateAreaStreet = {
+      "Lagos": {
+        "Ikeja": ["Allen Avenue", "Opebi", "Alausa", "Oba Akran", "Computer Village"],
+        "Surulere": ["Bode Thomas", "Adeniran Ogunsanya", "Aguda", "Ijesha", "Lawanson"],
+        "Yaba": ["Herbert Macaulay", "Sabo", "Tejuosho", "Alagomeji", "Akoka"],
+        "Lekki": ["Lekki Phase 1", "Chevron", "Ajah", "Ikate", "VGC"],
+        "Ikorodu": ["Ebute", "Igbogbo", "Owutu", "Agric", "Ijede"]
+      },
+      "Ogun": {
+        "Abeokuta": ["Panseke", "Kuto", "Lafenwa", "Oke-Ilewo", "Adigbe"],
+        "Sango": ["Joju", "Iyana-Iyesi", "Oju-Ore", "Ilogbo", "Ota"],
+        "Ijebu Ode": ["Itoro", "Molipa", "Imowo", "Oke Aje", "Ijasi"],
+        "Sagamu": ["Ijoku", "Ode Lemo", "Makun", "Sabo", "Ogunyanwo"]
+      },
+      "Oyo": {
+        "Ibadan North": ["Bodija", "Agbowo", "Samonda", "UI", "Sango"],
+        "Ibadan South-West": ["Ring Road", "Oke-Ado", "Oke-Bola", "Dugbe", "Challenge"],
+        "Ogbomosho": ["Takie", "Owode", "Arowomole", "Sabo", "Aguodo"],
+        "Oyo Town": ["Akesan", "Owode", "Fasola", "Iseyin Road", "Akeetan"]
+      },
+      "Osun": {
+        "Osogbo": ["Oke-Fia", "Alekuwodo", "Dada Estate", "Ogo-Oluwa", "Oke-Baale"],
+        "Ife": ["Modakeke", "OAU Campus", "Sabo", "Ilode", "Moore"],
+        "Ilesa": ["Oke-Omiru", "Imo", "Ifofin", "Isokun", "Irojo"]
+      },
+      "Ondo": {
+        "Akure": ["Alagbaka", "Oke Aro", "Ilesha Garage", "Oba Ile", "Oja Oba"],
+        "Ondo Town": ["Yaba", "Fagun", "Oka", "Enuowa", "Sabo"],
+        "Owo": ["Emure", "Ijebu", "Iloro", "Uso", "Idasen"]
+      },
+      "Ekiti": {
+        "Ado Ekiti": ["Fajuyi", "Oke-Ila", "Ajilosun", "Odo Ado", "Basiri"],
+        "Ikere": ["Odo Oja", "Uro", "Oke Osun", "Oke Ikere", "Ogbese"],
+        "Iyin": ["Iyin Road", "Are", "Odo", "Oke", "Igede"]
+      }
+    };
+
+    function updateAreaOptions() {
+      const state = document.getElementById('reg-state').value;
+      const areaSelect = document.getElementById('reg-area');
+      areaSelect.innerHTML = '<option value="">Select Area</option>';
+      if (state && stateAreaStreet[state]) {
+        Object.keys(stateAreaStreet[state]).forEach(area => {
+          const opt = document.createElement('option');
+          opt.value = area;
+          opt.textContent = area;
+          areaSelect.appendChild(opt);
+        });
+      }
+      document.getElementById('reg-street').value = '';
+      areaSelect.onchange = updateStreetPlaceholder;
+    }
+
+    function updateStreetPlaceholder() {
+      const state = document.getElementById('reg-state').value;
+      const area = document.getElementById('reg-area').value;
+      const streetInput = document.getElementById('reg-street');
+      if (state && area && stateAreaStreet[state] && stateAreaStreet[state][area]) {
+        streetInput.placeholder = "e.g. " + stateAreaStreet[state][area][0];
+        let datalist = document.getElementById('street-list');
+        if (!datalist) {
+          datalist = document.createElement('datalist');
+          datalist.id = 'street-list';
+          document.body.appendChild(datalist);
+          streetInput.setAttribute('list', 'street-list');
+        }
+        datalist.innerHTML = '';
+        stateAreaStreet[state][area].forEach(street => {
+          const opt = document.createElement('option');
+          opt.value = street;
+          datalist.appendChild(opt);
+        });
+      } else {
+        streetInput.placeholder = "Street";
+        streetInput.removeAttribute('list');
+      }
+    }
+  </script>
+</body>
+</html>
