@@ -4,7 +4,6 @@ localStorage.removeItem('gadgetLoggedIn');
 localStorage.removeItem('gadgetLastNotif');
 
 // --- API Endpoints ---
-// FIX: Remove /v1 to match your backend routes!
 const API_BASE = "https://ongod-phone.onrender.com/api";
 const ORDERS_API = `${API_BASE}/orders`;
 const PRODUCTS_API = `${API_BASE}/products`;
@@ -283,6 +282,15 @@ async function fetchAndDisplayProducts() {
   }
 }
 
+function getProductImageUrl(image) {
+  if (!image) return '';
+  // If image is already a full URL, use it; otherwise, prepend backend path
+  if (/^https?:\/\//i.test(image)) {
+    return image;
+  }
+  return `https://ongod-phone.onrender.com/images/${escapeHtml(image)}`;
+}
+
 function displayProducts(containerId, products) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -290,16 +298,19 @@ function displayProducts(containerId, products) {
     container.innerHTML = '<div style="color:#e74c3c;">No products found.</div>';
     return;
   }
-  container.innerHTML = products.map(product => `
-    <div class="Gadget-item">
-      <img src="images/${escapeHtml(product.image || '')}" alt="${escapeHtml(product.name || '')}">
-      <h2>${escapeHtml(product.name || '')}</h2>
-      <p>₦${escapeHtml(product.price || '')}</p>
-      <div class="button-group">
-        <button onclick="showBuyModal('${escapeHtml(product.name || '')}', '${escapeHtml(product.price || '')}', 'images/${escapeHtml(product.image || '')}')">Buy Now</button>
+  container.innerHTML = products.map(product => {
+    const imageUrl = getProductImageUrl(product.image || '');
+    return `
+      <div class="Gadget-item">
+        <img src="${imageUrl}" alt="${escapeHtml(product.name || '')}">
+        <h2>${escapeHtml(product.name || '')}</h2>
+        <p>₦${escapeHtml(product.price || '')}</p>
+        <div class="button-group">
+          <button onclick="showBuyModal('${escapeHtml(product.name || '')}', '${escapeHtml(product.price || '')}', '${imageUrl}')">Buy Now</button>
+        </div>
       </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
 // --- Search ---

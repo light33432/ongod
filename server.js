@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
+const multer = require('multer');
+const path = require('path');
 
 const app = express();
 app.use(cors());
@@ -35,6 +37,28 @@ const transporter = nodemailer.createTransport({
     user: process.env.GMAIL_USER || 'ayomideoluniyi49@gmail.com',
     pass: process.env.GMAIL_PASS || 'yukwpidvyujgpmsv'
   }
+});
+
+// --- IMAGE UPLOAD ENDPOINT (ADMIN/DEV) ---
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'images');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname.replace(/\s+/g, '_'));
+  }
+});
+const upload = multer({ storage: storage });
+
+// Upload a product image (admin/dev)
+// Usage: POST /api/products/upload-image (form-data: field "image")
+app.post('/api/products/upload-image', upload.single('image'), (req, res) => {
+  if (!req.file) return res.status(400).json({ error: 'No image uploaded' });
+  res.json({
+    success: true,
+    filename: req.file.filename,
+    url: `/images/${req.file.filename}`
+  });
 });
 
 // --- API ROUTES ---
