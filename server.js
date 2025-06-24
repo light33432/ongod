@@ -18,10 +18,12 @@ const PORT = process.env.PORT || 3000;
 // In-memory data (replace with DB in production)
 let users = [];
 let products = [
-  { id: 1, name: "iPhone 11", price: 900000, category: "phones", image: "iphone11.jpg" },
-  { id: 2, name: "HP Pavilion", price: 650000, category: "laptops", image: "hplaptop.jpg" },
-  { id: 3, name: "Mouse", price: 120000, category: "accessories", image: "mouse.jpg" }
+
+  { id: 1, name: "iPhone 11", price: 900000, category: "phones", image: "/images/iphone11.jpg" },
+  { id: 2, name: "HP Pavilion", price: 650000, category: "laptops", image: "/images/hplaptop.jpg" },
+  { id: 3, name: "Mouse", price: 120000, category: "accessories", image: "/images/mouse.jpg" }
 ];
+
 let orders = [];
 let notifications = [];
 let customerCareMessages = [];
