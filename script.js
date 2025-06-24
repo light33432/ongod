@@ -292,11 +292,11 @@ function displayProducts(containerId, products) {
   }
   container.innerHTML = products.map(product => `
     <div class="Gadget-item">
-      <img src="${escapeHtml(product.image || '')}" alt="${escapeHtml(product.name || '')}">
+      <img src="images/${escapeHtml(product.image || '')}" alt="${escapeHtml(product.name || '')}">
       <h2>${escapeHtml(product.name || '')}</h2>
       <p>₦${escapeHtml(product.price || '')}</p>
       <div class="button-group">
-        <button onclick="showBuyModal('${escapeHtml(product.name || '')}', '${escapeHtml(product.price || '')}', '${escapeHtml(product.image || '')}')">Buy Now</button>
+        <button onclick="showBuyModal('${escapeHtml(product.name || '')}', '${escapeHtml(product.price || '')}', 'images/${escapeHtml(product.image || '')}')">Buy Now</button>
       </div>
     </div>
   `).join('');
