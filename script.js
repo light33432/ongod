@@ -4,7 +4,8 @@ localStorage.removeItem('gadgetLoggedIn');
 localStorage.removeItem('gadgetLastNotif');
 
 // --- API Endpoints ---
-const API_BASE = "https://ongod-phone.onrender.com";
+// FIX: Remove /v1 to match your backend routes!
+const API_BASE = "https://ongod-phone.onrender.com/api";
 const ORDERS_API = `${API_BASE}/orders`;
 const PRODUCTS_API = `${API_BASE}/products`;
 const USERS_API = `${API_BASE}/users`;

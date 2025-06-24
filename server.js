@@ -31,8 +31,8 @@ let pendingVerifications = {};
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'ayomideoluniyi49@gmail.com',
-    pass: 'yukwpidvyujgpmsv'
+    user: process.env.GMAIL_USER || 'ayomideoluniyi49@gmail.com',
+    pass: process.env.GMAIL_PASS || 'yukwpidvyujgpmsv'
   }
 });
 
@@ -152,7 +152,7 @@ app.post('/api/users/register', async (req, res) => {
   // Send code to email
   try {
     await transporter.sendMail({
-      from: 'ayomideoluniyi49@gmail.com',
+      from: process.env.GMAIL_USER || 'ayomideoluniyi49@gmail.com',
       to: email,
       subject: 'ONGOD PHONE GADGET - Email Verification Code',
       html: `<h2>ONGOD PHONE GADGET</h2>
@@ -187,7 +187,7 @@ app.post('/api/users/resend-code', async (req, res) => {
 
   try {
     await transporter.sendMail({
-      from: 'ayomideoluniyi49@gmail.com',
+      from: process.env.GMAIL_USER || 'ayomideoluniyi49@gmail.com',
       to: email,
       subject: 'ONGOD PHONE GADGET - Email Verification Code (Resent)',
       html: `<h2>ONGOD PHONE GADGET</h2>
@@ -345,4 +345,15 @@ app.post('/api/dev-add-user', async (req, res) => {
   const hash = await bcrypt.hash(password, 10);
   users.push({ username, password: hash, email });
   res.json({ success: true, user: { username, email } });
+});
+
+// --- 404 Handler for unknown routes ---
+app.use((req, res, next) => {
+  res.status(404).json({ error: 'Endpoint not found' });
+});
+
+// --- Global Error Handler ---
+app.use((err, req, res, next) => {
+  console.error('Server error:', err);
+  res.status(500).json({ error: 'Internal server error' });
 });
